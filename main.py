@@ -64,11 +64,9 @@ def main(path):
     
     domains = validate_domains(domains)
     
-    click.echo("IP Addresses:")
     for ip in set(ips):
         click.echo(ip)
     
-    click.echo("\nDomain Names:")
     for domain in set(domains):
         click.echo(domain)
 

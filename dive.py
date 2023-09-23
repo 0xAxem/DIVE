@@ -108,18 +108,14 @@ def main(path, output, active, filter_lenght, filter_private):
         click.echo("Invalid path!")
         return
     
-    # Validate domains
     domains = validate_domains(domains)
     
-    # Filter by lenght
     if filter_lenght > 0:
         domains = filter_by_domain_lenght(domains, filter_lenght)
     
-    # Filter private ip addresses
     if filter_private:
         ips = filter_by_private_ip(ips)
     
-    # Active scan
     if active:
         domains = active_scan(domains)
         

@@ -3,7 +3,7 @@
 ## Overview
 DIVE is a Python-based tool designed to extract and validate IP addresses and domain names from any type of file, including text, binary, and logs. It offers additional features such as active DNS scanning, domain length filtering, and private IP filtering.
 ### Application in C2 Detection
-DIVE can be particularly useful for cybersecurity professionals in identifying potential Command and Control (C2) servers. By extracting and validating IP addresses and domain names from network logs, system logs, malware and other artifacts, you can isolate suspicious or malicious traffic for further investigation.
+DIVE can be particularly useful for cybersecurity professionals in identifying potential Command and Control (C2) servers statically. By extracting and validating IP addresses and domain names from network logs, system logs, malware and other artifacts, you can isolate suspicious or malicious traffic for further investigation.
 
 ## Features
 
@@ -12,7 +12,11 @@ DIVE can be particularly useful for cybersecurity professionals in identifying p
 - **Filter domains by length**
 - **Filter out private IP addresses**
 - **Perform active DNS scanning to identify active domains**
-
+## Known Limitations
+- **Subject to DNS rate limits**
+- **May produce false positives in binary files**
+- **DNS active scan does not cover all DNS record type to improve performance**
+- **IPv6 is not supported**
 ## Installation
 
 ### Clone the repository:
@@ -36,7 +40,7 @@ python dive.py [OPTIONS] PATH
 ### Options
 - `--output, -o`: Specify the output file (default is `output.txt`)
 - `--active, -a`: Perform an active DNS scan (default is `False`)
-- `--filter-length, -fl`: Filter domains by minimum length (default is no filteration; `4` is recommened)
+- `--filter-length, -fl`: Filter domains by minimum length (default is no filteration; `3` is recommened)
 - `--filter-private, -fp`: Filter out private IP addresses (default is `False`)
 
 ### Examples

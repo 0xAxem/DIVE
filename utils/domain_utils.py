@@ -1,7 +1,10 @@
 import re
-import socket
 import validators
 import tld
+import dns.resolver
+from threading import Thread
+from concurrent.futures import ThreadPoolExecutor
+
 
 def extract_domains(text):
     domain_pattern = r"\b(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z0-9][a-z0-9-]{0,61}[a-z0-9]\b"
@@ -19,10 +22,36 @@ def validate_domains(domains):
                 pass
             
     return valid_domains
-    # return [domain for domain in domains if validators.domain(domain) and tld.is_tld(tld.get_tld(domain, fix_protocol=True, fail_silently=True))]
 
-def filter_by_domain_lenght(domains, min_lenght):
-    return [domain for domain in domains if len(domain) >= min_lenght]
+def filter_by_domain_lenght(domains, min_length):
+    filtered_domains = []
+    for domain in domains:
+        try:
+            domain_name = tld.get_fld(domain, fix_protocol=True, fail_silently=True)
+            if domain_name and len(domain_name.split('.')[0]) >= min_length:
+                filtered_domains.append(domain)
+        except:
+            pass
+    return filtered_domains
 
-def active_scan(domains):
-    return [domain for domain in domains if socket.gethostbyname(domain)]
+def check_domain(domain, active_domains, record_types):
+    for record_type in record_types:
+        try:
+            answers = dns.resolver.resolve(domain, record_type)
+            if answers:
+                active_domains.append(domain)
+                break
+        except Exception as e:
+            continue
+
+def active_scan(domains, threads):
+    active_domains = []
+    record_types = ['A', 'AAAA', 'CNAME', 'TXT', 'MX', 'NS']
+    
+    with ThreadPoolExecutor(max_workers=threads) as executor:  # You can adjust max_workers as needed
+        futures = {executor.submit(check_domain, domain, active_domains, record_types): domain for domain in domains}
+        
+        for future in futures:
+            future.result()
+
+    return active_domains

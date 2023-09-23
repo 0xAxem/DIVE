@@ -10,7 +10,9 @@ from utils.ip_utils import filter_by_private_ip
 @click.option('--active', '-a', help="Perform active DNS validation scan", is_flag=True, default=False)
 @click.option('--filter-lenght', '-fl', help="Minimum domain character lenght", type=int, default=0)
 @click.option('--filter-private', '-fp', help="Filter out IPs in private ranges", is_flag=True, default=False)
-def main(path, active, filter_lenght, filter_private):
+# add threads option for active scan
+@click.option('--threads', '-t', help="Number of threads to use for active scan", type=int, default=40)
+def main(path, active, threads, filter_lenght, filter_private):
     """
     Extract IP addresses and domain names from a file or directory.
 
@@ -34,7 +36,7 @@ def main(path, active, filter_lenght, filter_private):
         ips = filter_by_private_ip(ips)
     
     if active:
-        domains = active_scan(domains)
+        domains = active_scan(domains, threads)
         
     for ip in set(ips):
         click.echo(ip)

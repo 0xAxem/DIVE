@@ -1,12 +1,9 @@
-# DIVE (Domain and IP Verifier Extractor)
-
+# DIVE (Domain and IP Validator Extractor)
 ## Overview
 DIVE is a Python-based tool designed to extract and validate IP addresses and domain names from any type of file, including text, binary, and logs. It offers additional features such as active DNS scanning, domain length filtering, and private IP filtering.
 ### Application in C2 Detection
-DIVE can be particularly useful for cybersecurity professionals in identifying potential Command and Control (C2) servers statically. By extracting and validating IP addresses and domain names from network logs, system logs, malware and other artifacts, you can isolate suspicious or malicious traffic for further investigation.
-
+DIVE can be useful for cybersecurity professionals in identifying potential Command and Control (C2) servers statically. By extracting and validating IP addresses and domain names from network logs, system logs, malware executables and other artifacts, you can isolate suspicious or malicious traffic for further investigation.
 ## Features
-
 - **Extract IP addresses and domain names from any file type and directories**
 - **Validate extracted domains**
 - **Filter domains by length**
@@ -18,9 +15,7 @@ DIVE can be particularly useful for cybersecurity professionals in identifying p
 - **DNS active scan does not cover all DNS record type to improve performance**
 - **IPv6 is not supported**
 ## Installation
-
 ### Clone the repository:
-
 ```bash
 git clone https://github.com/0xAxem/DIVE.git
 ```
@@ -42,25 +37,18 @@ python dive.py [OPTIONS] PATH
 - `--active, -a`: Perform an active DNS scan (default is `False`)
 - `--filter-length, -fl`: Filter domains by minimum length (default is no filteration; `3` is recommened)
 - `--filter-private, -fp`: Filter out private IP addresses (default is `False`)
-
 ### Examples
 To extract IPs and domains from a single file:
-
 ```bash
 python dive.py /path/to/file.txt
 ```
-
 To extract IPs and domains from a directory:
-
 ```bash
 python dive.py /path/to/directory/
 ```
-
 To perform an active DNS scan:
-
 ```bash
 python dive.py --active /path/to/file.txt
 ```
-
 ## Contributing
 If you'd like to contribute, please fork the repository and make changes as you'd like. Pull requests are warmly welcome.

@@ -80,7 +80,7 @@ def filter_by_private_ip(ips):
     
     return filtered_ips
 
-def validate_domains( domains):
+def validate_domains(domains):
     """ 
     Validate domains using validators and tldextract.
     This validation process does NOT prope any dns query.
@@ -99,13 +99,16 @@ def validate_domains( domains):
     return valid_domains
 
 @click.command()
-@click.argument('path', help="Path to file or directory", type=click.Path(exists=True))
+@click.argument('path', type=click.Path(exists=True))
 @click.option('--active', '-a', help="Perform active DNS validation scan", is_flag=True, default=False)
 @click.option('--filter-lenght', '-fl', help="Minimum domain character lenght", type=int, default=0)
 @click.option('--filter-private', '-fp', help="Filter out IPs in private ranges", is_flag=True, default=False)
 def main(path, output, active, filter_lenght, filter_private):
     """
     Extract IP addresses and domain names from a file or directory.
+
+    Arguments:
+    path -- Path to file or directory
     """
     
     if os.path.isfile(path):

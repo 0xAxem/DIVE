@@ -3,7 +3,6 @@
 ## Overview
 DIVE is a Python-based tool designed to extract and validate IP addresses and domain names from various types of files, including text, binary, and logs. It offers additional features such as active DNS scanning, domain length filtering, and private IP filtering.
 ### Application in C2 Detection
-
 DIVE can be particularly useful for cybersecurity professionals in identifying potential Command and Control (C2) servers. By extracting and validating IP addresses and domain names from network logs, system logs, malware and other artifacts, you can isolate suspicious or malicious traffic for further investigation.
 
 ## Features

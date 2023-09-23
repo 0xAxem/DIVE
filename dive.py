@@ -31,7 +31,9 @@ def process_directory(directory_path):
     return all_ips, all_domains
 
 def active_scan(domains):
-    """ Send a dns query to check for active domains."""  
+    """ 
+    Send a dns query to check for active domains.
+    """  
     active_domains = []
     
     for domain in domains:
@@ -45,7 +47,9 @@ def active_scan(domains):
     return active_domains
 
 def filter_by_domain_lenght(domains, min_lenght):
-    """ Filter domains by lenght."""
+    """
+    Filter domains by lenght.
+    """
     filtered_domains = []
     
     for domain in domains:
@@ -55,7 +59,9 @@ def filter_by_domain_lenght(domains, min_lenght):
     return filtered_domains
     
 def filter_by_private_ip(ips):
-    """ Filter private ip addresses."""
+    """
+    Filter out private ip addresses.
+    """
     
     private_networks = [
         ip_network('10.0.0.0/8'),
@@ -75,8 +81,9 @@ def filter_by_private_ip(ips):
     return filtered_ips
 
 def validate_domains( domains):
-    """ Validate domains using validators and tldextract.
-        This validation process does NOT prope any dns query.
+    """ 
+    Validate domains using validators and tldextract.
+    This validation process does NOT prope any dns query.
     """
     valid_domains = []
     
@@ -92,13 +99,14 @@ def validate_domains( domains):
     return valid_domains
 
 @click.command()
-@click.argument('path', type=click.Path(exists=True))
-# @click.option('--output', '-o', type=click.File('w'), default='output.txt')
-@click.option('--active', '-a', is_flag=True, default=False)
-@click.option('--filter-lenght', '-fl', type=int, default=0)
-@click.option('--filter-private', '-fp', is_flag=True, default=False)
+@click.argument('path', help="Path to file or directory", type=click.Path(exists=True))
+@click.option('--active', '-a', help="Perform active DNS validation scan", is_flag=True, default=False)
+@click.option('--filter-lenght', '-fl', help="Minimum domain character lenght", type=int, default=0)
+@click.option('--filter-private', '-fp', help="Filter out IPs in private ranges", is_flag=True, default=False)
 def main(path, output, active, filter_lenght, filter_private):
-    """Extract IP addresses and domain names from a file or directory."""
+    """
+    Extract IP addresses and domain names from a file or directory.
+    """
     
     if os.path.isfile(path):
         ips, domains = process_file(path)

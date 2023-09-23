@@ -37,6 +37,7 @@ python dive.py [OPTIONS] PATH
 - `--active, -a`: Perform an active DNS scan (default is `False`)
 - `--filter-length, -fl`: Filter domains by minimum length (default is no filteration; `3` is recommened)
 - `--filter-private, -fp`: Filter out private IP addresses (default is `False`)
+- `--threads, -t`: Number of threads to use for active scan (default is `40`)
 ### Examples
 To extract IPs and domains from a single file:
 ```bash

@@ -7,7 +7,7 @@ from concurrent.futures import ThreadPoolExecutor
 
 
 def extract_domains(text):
-    domain_pattern = r"\b(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z0-9][a-z0-9-]{0,61}[a-z0-9]\b"
+    domain_pattern = r"\b((?!-)[A-Za-z0-9-]{1,63}(?<!-)\.)+[A-Za-z]{2,63}\b"
     return re.findall(domain_pattern, text)
 
 def validate_domains(domains):

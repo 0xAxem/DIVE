@@ -10,6 +10,7 @@ DIVE can be useful for cybersecurity professionals in identifying potential Comm
 - **Filter out private IP addresses**
 - **Perform active DNS scanning to identify active domains**
 ## Known Limitations
+- **The tool is resource intensive with large file (i.e. memory dumps, disk images) and still requires a lot of optimizations**
 - **Subject to DNS rate limits**
 - **May produce false positives in binary files**
 - **DNS active scan does not cover all DNS record type to improve performance**

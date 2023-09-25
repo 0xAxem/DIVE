@@ -34,7 +34,6 @@ Run the script using the following command:
 python dive.py [OPTIONS] PATH
 ```
 ### Options
-- `--output, -o`: Specify the output file (default is `output.txt`)
 - `--active, -a`: Perform an active DNS scan (default is `False`)
 - `--filter-length, -fl`: Filter domains by minimum length (default is no filteration; `3` is recommened)
 - `--filter-private, -fp`: Filter out private IP addresses (default is `False`)

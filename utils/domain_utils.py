@@ -5,11 +5,16 @@ import dns.resolver
 from threading import Thread
 from concurrent.futures import ThreadPoolExecutor
 
-
-def extract_domains(text):
-    # domain_pattern = r"\b((?!-)[A-Za-z0-9-]{1,63}(?<!-)\.)+[A-Za-z]{2,63}\b"
-    domain_pattern = r"\b([a-zA-Z0-9.-]+\.[a-zA-Z]{2,})\b"
+def extract_domains(text, filter_domains):
+    if filter_domains is not None:
+        escaped_domains = [re.escape(domain) for domain in filter_domains]
+        domains_pattern = '|'.join(escaped_domains)
+        domain_pattern = r'(?i)\b(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)*(?:' + domains_pattern + r')\b'
+    else:
+        domain_pattern = r'(?i)\b(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z]{2,}\b'
+    
     return re.findall(domain_pattern, text)
+
 
 def validate_domains(domains):
     valid_domains = []  
